@@ -36,7 +36,7 @@ function check_git_status {
 
 
 # satic set of error maps, defined by bash standards, add your own here as needed 
-emapsH="1 = Catchall for general errors\n2 = Misuse of shell builtins\n126 = Command invoked cannot execute\n127 = command not found\n128 = invalid argument to exit\n130 = script terminated by ctrl+c\n255 = exit code out of range"
+export emapsH="1 = Catchall for general errors\n2 = Misuse of shell builtins\n126 = Command invoked cannot execute\n127 = command not found\n128 = invalid argument to exit\n130 = script terminated by ctrl+c\n255 = exit code out of range"
 
 #Check the return value of the last process ran and return the status through our checks and c returns to see if it matches one
 check_cerror(){
@@ -57,7 +57,7 @@ check_cerror(){
 }
 
 # export
-export -f check_git_branch check_git_status git_tree check_cerror emapsH
+export -f check_git_branch check_git_status git_tree check_cerror 
 
 
 export PS1="\n[\$( check_cerror \$?  ) ]\n \$(if [[ \$? == 0 ]]; 
