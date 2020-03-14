@@ -8,4 +8,5 @@ Can quickly be added to your .bashrc/.bash_profile as below
 - add entries to bashrc
 
 cp -iav .bashrc{,$(date -I)}
+
 curl -sL https://raw.githubusercontent.com/Sky-Bly/ps1shrug/master/bashrc  >> ~/.bashrc
