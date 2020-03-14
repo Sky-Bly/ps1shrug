@@ -41,16 +41,19 @@ export emapsH="1 = Catchall for general errors\n2 = Misuse of shell builtins\n12
 #Check the return value of the last process ran and return the status through our checks and c returns to see if it matches one
 check_cerror(){
   #we return the argument of this function in exit to try to pass-through any caught error codes
-	argIn=$1
-	cerror_found=$(egrep "\s$1\s" /usr/include/sysexits.h | awk -F'^#define' '{print $NF}')
+        argIn=$1
+ if [ -e ~/.sysexits.h ] ; then       
+           exitcodes="$HOME/.sysexits.h"
+           else exitcodes="/usr/include/sysexits.h"
+ fi
+        cerror_found=$(egrep "\s$1\s" $exitcodes | awk -F'^#define' '{print $NF}')
  if ! [[ $cerror_found =  "" ]]  ; then
           echo "$cerror_found"
-	  exit $argIn
-        else
-                checkBashMap=$(echo -e $emapsH|grep $argIn | head -n 1)
+          exit $argIn
+        else checkBashMap=$(echo -e $emapsH|grep $argIn | head -n 1)
         if ! [[ $checkBashMap =~  "^$" ]] ; then
                echo $checkBashMap
-	       exit $argIn
+               exit $argIn
         fi
         exit $argIn
  fi
